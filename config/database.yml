@@ -1,0 +1,19 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+development:
+  adapter: postgresql
+  database: embryo_development
+  pool: 5
+  encoding: utf8
+  host: localhost
+  allow_concurrency: true
+  username: postgres
+  password: postgres
+test:
+  adapter: postgresql
+  database: embryo_test
+  pool: 5
+  encoding: utf8
+  host: localhost
+  allow_concurrency: true
+  username: postgres
+  password: postgres

@@ -1,28 +1,23 @@
 require 'spec_helper'
 
 describe Course do
-  subject(:course) { Course.new custom_id: "Turma A" }
+  subject(:course) { build(:course, custom_id: "Turma A") }
 
   it { should be_valid }
+
+  context "#relationships" do
+    it { should have_many(:students) }
+    it { should have_many(:teachers) }
+    it { should have_many(:subjects) }
+  end
+
+  context "#validations" do
+    it { should validate_presence_of(:custom_id) }
+  end
 
   it "must return custom_id when call the class" do
     course.to_s.should == "Turma A"
   end
 
 
-  context "with some students" do
-    let(:brunno) { Student.new name: "Brunno", email: "brunno@brunno.me" }
-    let(:paulo) { Student.new name: "Paulo", email: "paulo@brunno.me" }
-    subject(:course) { Course.new custom_id: "Turma C", students: [brunno, paulo] }
-
-    it { should be_valid }
-    it "contains Brunno and Paulo" do
-      course.students.should include(paulo)
-      course.students.should include(brunno)
-    end
-
-    it "contains two students" do
-      course.students.length.should == 2
-    end
-  end
 end

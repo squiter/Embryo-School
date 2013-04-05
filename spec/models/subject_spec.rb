@@ -2,24 +2,15 @@
 require 'spec_helper'
 
 describe Subject do
-  subject { Subject.new name: "Matemática" }
 
-  it { should be_valid }
-
-  context "with teachers" do
-    let(:matz) { Teacher.new name: "Matz", email: "matz@ruby.com" }
-    let(:valim) { Teacher.new name: "José", email: "josevalim@ptech.com" }
-    subject { Subject.new name: "Ruby", teachers: [valim,matz] }
-
-    it { should be_valid }
-
-    it "must be include Matz and José Valim" do
-      subject.teachers.should include(valim)
-      subject.teachers.should include(matz)
-    end
-
-    it "must contains two teachers" do
-      subject.teachers.length.should == 2
-    end
+  context "#validations" do
+    it { should validate_presence_of(:name) }
   end
+
+  context "#relationships" do
+    it { should have_many(:assign_teachers) }
+    it { should have_many(:courses) }
+    it { should have_and_belong_to_many(:teachers) }
+  end
+
 end

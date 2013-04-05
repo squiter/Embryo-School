@@ -22,3 +22,11 @@ group :development do
   gem 'pry-doc'
   gem 'awesome_print'
 end
+
+group :development, :test do
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'shoulda'
+end

@@ -1,20 +1,13 @@
 require "spec_helper"
 
 describe Person do
-  let(:brunno) { Person.new name: "Brunno", surname: "dos Santos", email: "squiter85@gmail.com" }
-  subject { brunno }
 
-  it "must have a e-mail" do
-    brunno.email = ""
-    brunno.should_not be_valid
+  context "#validations" do
+    it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:name) }
+    it { should allow_value("teste@teste.com").for(:email) }
+    it { should_not allow_value("teste").for(:email) }
+    it { should_not allow_value("teste@b").for(:email) }
   end
-  it "must have a name" do
-    brunno.name = ""
-    brunno.should_not be_valid
-  end
-  it "has a valid email" do
-    brunno.should be_valid
-    brunno.email = "teste"
-    brunno.should_not be_valid
-  end
+
 end
